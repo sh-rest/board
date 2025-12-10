@@ -15,7 +15,6 @@ const io = new SocketIOServer(server, {
 const redisClient = Redis.createClient();
 redisClient.connect();
 
-
 app.use(express.json());
 
 // Basic health check
@@ -23,8 +22,9 @@ app.get("/health", (_, res) => res.send("OK"));
 
 // Helper: Generate short random board ID
 function generateBoardId(length = 6) {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let id = '';
+  const chars =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let id = "";
   for (let i = 0; i < length; i++) {
     id += chars.charAt(Math.floor(Math.random() * chars.length));
   }
@@ -35,9 +35,13 @@ function generateBoardId(length = 6) {
 app.post("/api/board", async (req, res) => {
   const boardId = generateBoardId();
   // Store minimal metadata in Redis (ephemeral)
-  await redisClient.set(`board:${boardId}`, JSON.stringify({ created: Date.now() }), {
-    EX: 60 * 60 * 6 // 6 hours expiry
-  });
+  await redisClient.set(
+    `board:${boardId}`,
+    JSON.stringify({ created: Date.now() }),
+    {
+      EX: 60 * 60 * 6, // 6 hours expiry
+    }
+  );
   res.json({ boardId });
 });
 
