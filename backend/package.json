@@ -1,0 +1,21 @@
+{
+  "name": "board-backend",
+  "version": "0.1.0",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node dist/index.js",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^24.10.2",
+    "@types/socket.io": "^3.0.1",
+    "express": "^5.2.1",
+    "redis": "^5.10.0",
+    "socket.io": "^4.8.1",
+    "typescript": "^5.9.3",
+    "y-websocket": "^3.0.0",
+    "yjs": "^13.6.27"
+  }
+}
